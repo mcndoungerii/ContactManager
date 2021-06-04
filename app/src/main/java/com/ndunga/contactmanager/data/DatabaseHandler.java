@@ -40,7 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    private void createContact(Contact contact) {
+    public void createContact(Contact contact) {
 
         //GET writable db
         SQLiteDatabase db = this.getWritableDatabase();
@@ -60,7 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    private Contact getContact(int id){
+    public Contact getContact(int id){
         //GET getReadable
         SQLiteDatabase db = this.getReadableDatabase();
 
