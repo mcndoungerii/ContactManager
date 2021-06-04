@@ -22,21 +22,31 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
         //create contact to save to db
-        Contact json = new Contact();
-        json.setName("Allenr");
-        json.setPhoneNumber("014616141");
 
-        //cursor.
-//        contact.setName("Everson Ali");
-//        contact.setPhoneNumber("7673732873");
 
+        //call get one contact method
+        Contact contact = databaseHandler.getContact(2);
+
+        Log.d("GET one", String.valueOf(contact));
+
+        contact.setName("Josep");
+        contact.setPhoneNumber("014616141");
+
+        //call update method
+
+        int updateContact = databaseHandler.updateContact(contact);
+
+        Log.d("Update", String.valueOf(updateContact));
+
+
+
+       // Contact json = new Contact();
         //databaseHandler.createContact(json);
         List<Contact> contactList = databaseHandler.getAllContacts();
 
-        for (Contact contact:contactList){
+        for (Contact contact1:contactList){
 
-            Log.d("GET:::",contact.getName());
-            System.out.println("GET:"+contact.getName());
+            Log.d("GET:::",contact1.getName());
         };
     }
 }
