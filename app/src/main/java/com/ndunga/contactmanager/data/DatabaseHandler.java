@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -25,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_TABLE = "CREATE TABLE "+ Util.TABLE_NAME + "(" +
                 Util.KEY_ID + " INTEGER PRIMARY KEY," + Util.KEY_NAME +
-                " TEXT,"+Util.KEY_PHONE_NUMBER+ "TEXT)";
+                " TEXT,"+Util.KEY_PHONE_NUMBER+ " TEXT"+")";
 
         db.execSQL(CREATE_TABLE);
 
@@ -57,6 +58,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         //insert to db
         db.insert(Util.TABLE_NAME,null,contentValues);
+
+        Log.d("DbHandler","Create:: "+"Add Contacts");
 
         //after insert,close db
         db.close();
