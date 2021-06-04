@@ -12,6 +12,9 @@ import com.ndunga.contactmanager.R;
 import com.ndunga.contactmanager.model.Contact;
 import com.ndunga.contactmanager.utils.Util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHandler extends SQLiteOpenHelper {
     public DatabaseHandler(@Nullable Context context) {
         super(context, Util.DATABASE_NAME, null, Util.DATABASE_VERSION);
@@ -84,4 +87,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return contact;
     }
+
+    public List<Contact> getAllContacts(){
+        //create new arrayList of contacts
+        List<Contact> contactList = new ArrayList<>();
+
+        //call db readable
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Create SELECT statement
+        String selectAll = "SELECT * FROM " +Util.TABLE_NAME;
+
+        //Call cursor, use rawQuery
+        Cursor cursor = db.rawQuery(selectAll,null);
+
+        //check cursor
+        if(cursor.moveToFirst()){
+            do {
+
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhoneNumber(cursor.getString(1));
+
+                //add contact to contactList
+                contactList.add(contact);
+
+            }while(cursor.moveToNext());
+        }
+
+        return contactList;
+    }
+
+
 }
